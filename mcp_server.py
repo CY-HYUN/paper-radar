@@ -18,6 +18,7 @@ needs it; the radar itself stays standard library.
 """
 from __future__ import annotations
 
+import functools
 import os
 import re
 import shutil
@@ -38,7 +39,10 @@ TOOLS = ["list_problems", "show_problem", "week_candidates", "pending_updates", 
 def resolve_ws(arg: str) -> Path:
     """A workspace given relative to this tool folder (`workspace`), or absolute; PAPER_RADAR_WORKSPACE overrides."""
     p = Path(os.environ.get("PAPER_RADAR_WORKSPACE") or arg)
-    return p if p.is_absolute() else (HERE / p).resolve()
+    p = p if p.is_absolute() else (HERE / p).resolve()
+    if not p.is_dir():   # `--smoke` with its folder left off once served a folder named "--smoke" and exited 0
+        raise SystemExit(f"no workspace folder at {p}\n{__doc__}")
+    return p
 
 
 def list_problems(ws: Path) -> str:
@@ -140,39 +144,51 @@ def start_card(ws: Path, row_id: str, paper_id: str) -> str:
 
 def build_server(ws: Path):
     from mcp.server.mcpserver import MCPServer
+    from mcp.server.mcpserver.exceptions import ToolError
 
     server = MCPServer(name="paper-radar", instructions=(
         "The team's open problems (at most ten), each with its metric, the command that measured it and what was "
         "already tried, plus the papers the weekly job matched to them. Read tools first; update_problem changes one "
         "cell and keeps the ledger's gates."))
 
-    @server.tool()
+    def tool(fn):
+        """Register fn; a refusal the ledger saw coming reaches the model with its reason (the SDK hides the text of
+        any other exception as a crash)."""
+        @functools.wraps(fn)
+        def wrapper(*args, **kwargs):
+            try:
+                return fn(*args, **kwargs)
+            except ledger.LedgerError as exc:
+                raise ToolError(str(exc)) from exc
+        return server.tool()(wrapper)
+
+    @tool
     def list_problems_tool() -> str:
         """List the open problems with their state (open, stale, closed), last verification date and baseline commit."""
         return list_problems(ws)
 
-    @server.tool()
+    @tool
     def show_problem_tool(row_id: str) -> str:
         """Show one problem in full: metric and command, baseline commit, failing examples, what was tried, seeds."""
         return show_problem(ws, row_id)
 
-    @server.tool()
+    @tool
     def week_candidates_tool(week: str | None = None, row_id: str | None = None) -> str:
         """Papers the weekly job matched. week like '2026-W39' (default: latest); row_id limits to one problem."""
         return week_candidates(ws, week, row_id)
 
-    @server.tool()
+    @tool
     def pending_updates_tool() -> str:
         """Ledger updates the weekly job proposed from the team's git history that nobody has decided yet."""
         return pending_updates(ws)
 
-    @server.tool()
+    @tool
     def update_problem_tool(row_id: str, field: str, value: str) -> str:
         """Change one cell of one problem (e.g. a new number after re-running its command). Refused if the ledger's
         gates fail. Resets last_verified to today."""
         return update_problem(ws, row_id, field, value)
 
-    @server.tool()
+    @tool
     def start_card_tool(row_id: str, paper_id: str) -> str:
         """Start a card (precedent, our version, difference, smallest one-day test) for a paper the radar surfaced."""
         return start_card(ws, row_id, paper_id)
@@ -231,9 +247,16 @@ def selftest() -> None:
                 pass
             else:
                 raise AssertionError(f"start_card accepted {bad}")
+        assert resolve_ws(str(ws)) == ws
+        try:
+            resolve_ws(str(ws / "--smoke"))
+        except SystemExit:
+            pass
+        else:
+            raise AssertionError("resolve_ws accepted a missing folder")
     print("selftest ok: list, show, week filter, pending count; update refused on a planted term, a pipe, the id "
           "column and a missing row with the file unchanged, accepted otherwise with last_verified reset; card "
-          "started once, refused for a repeat and for an unseen paper")
+          "started once, refused for a repeat and for an unseen paper; a missing workspace folder stops the server")
 
 
 async def _smoke(ws: Path) -> None:
@@ -257,12 +280,19 @@ async def _smoke(ws: Path) -> None:
                 seen = card.json.loads((copy / "seen.json").read_text(encoding="utf-8"))["papers"] if (copy / "seen.json").exists() else {}
                 if seen:
                     calls.append(("start_card_tool", {"row_id": first, "paper_id": next(iter(seen))}))
+                crashed = []
                 for name, args in calls:
                     res = await session.call_tool(name, args)
                     text = " ".join(getattr(c, "text", "") for c in res.content)
-                    status = "ERROR" if res.is_error else "ok"
-                    print(f"{status:5} {name}({', '.join(f'{k}={v}' for k, v in args.items())}) -> {text[:110]!r}")
-    print(f"smoke done on a copy of {ws.name}: {len(calls)} of {len(TOOLS)} tools called over MCP; the original is untouched")
+                    # a refusal carries its reason after the tool name; a crash carries the bare SDK message only
+                    status = "ok" if not res.is_error else "CRASH" if text.strip() == f"Error executing tool {name}" else "refused"
+                    if status == "CRASH":
+                        crashed.append(name)
+                    print(f"{status:7} {name}({', '.join(f'{k}={v}' for k, v in args.items())}) -> {text[:150]!r}")
+    print(f"smoke on a copy of {ws.name}: {len(calls)} of {len(TOOLS)} tools called over MCP, {len(crashed)} crashed; "
+          f"the original is untouched")
+    if crashed:
+        raise SystemExit(f"crashed over MCP: {', '.join(crashed)}")
 
 
 if __name__ == "__main__":
