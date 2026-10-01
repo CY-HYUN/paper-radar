@@ -217,31 +217,31 @@ def selftest() -> None:
         ws.mkdir()
         repo = Path(d) / "team"
         repo.mkdir()
-        env = {**os.environ, "GIT_AUTHOR_DATE": "2026-09-17T10:00:00", "GIT_COMMITTER_DATE": "2026-09-17T10:00:00",
+        env = {**os.environ, "GIT_AUTHOR_DATE": "2026-09-17T10:00:00+0000", "GIT_COMMITTER_DATE": "2026-09-17T10:00:00+0000",
                "GIT_AUTHOR_NAME": "t", "GIT_AUTHOR_EMAIL": "t@t", "GIT_COMMITTER_NAME": "t", "GIT_COMMITTER_EMAIL": "t@t"}
         subprocess.run(["git", "init", "-q", "-b", "main", str(repo)], check=True)
         (repo / "scorer.py").write_text("x", encoding="utf-8")
         subprocess.run(["git", "-C", str(repo), "add", "."], check=True)
-        subprocess.run(["git", "-C", str(repo), "commit", "-q", "-m", "scoring: pose-independent alignment"], check=True, env=env)
+        subprocess.run(["git", "-C", str(repo), "commit", "-q", "-m", "scoring: new alignment step"], check=True, env=env)
         (ws / "forbidden_terms.txt").write_text("ACME\n", encoding="utf-8")
         (ws / "ledger.md").write_text(header + rows, encoding="utf-8")
         (ws / "chat.md").write_text("## 2026-09-07 — a paper\n> https://arxiv.org/pdf/2609.03811\nreading drops positions on dense drawings\n"
-                                    "they're playing the easy game with python\n## 2026-08-01 — old\nhttps://arxiv.org/abs/2608.00001\n", encoding="utf-8")
+                                    "they only beat an easy baseline\n## 2026-08-01 — old\nhttps://arxiv.org/abs/2608.00001\n", encoding="utf-8")
         (ws / "ATTEMPTS.md").write_text("### open — 1\n| q | out | where |\n|---|---|---|\n| a | b | c |\n### refused — 1\n\n| question | what came out | where |\n"
-                                        "|---|---|---|\n| Can labels beat the selector? | No: 0.569 against 0.695 | `fit.py` |\n### closed\n", encoding="utf-8")
+                                        "|---|---|---|\n| Can labels beat the selector? | No: 0.61 against 0.70 | `fit.py` |\n### closed\n", encoding="utf-8")
         (ws / "radar.toml").write_text(
             '[arxiv]\nendpoint="x"\ncategories=["cs.CV"]\ncourtesy_seconds=0\npage_size=1\n[match]\nmin_fraction=0.5\n'
             '[semantic_scholar]\ngraph="x"\nrecommendations="x"\nkey_env="K"\nbackoff_seconds=[]\n'
             '[state_diff]\ndead_after_weeks = 8\ngit_fetch = false\n'
             f'[[state_diff.repos]]\nname="team"\npath="../team"\nbranch="main"\nwatch_paths=["scorer.py"]\naffects_rows="cad_score"\n'
-            '[state_diff.dated_markdown_logs]\npaths=["chat.md"]\nverdict_pattern="playing the easy game|not better"\n'
+            '[state_diff.dated_markdown_logs]\npaths=["chat.md"]\nverdict_pattern="only beat an easy baseline|not better"\n'
             '[state_diff.attempts_table]\npath="ATTEMPTS.md"\nheading="### refused"\n', encoding="utf-8")
         out, counts = run(ws, today=date(2026, 9, 21), since=date(2026, 9, 1), do_fetch=False)
         text = out.read_text(encoding="utf-8")
         assert "[ ] row 1 | baseline_ref | date:2026-08-21 -> STALE (1 commits" in text, text
         assert "row 2 | seed_papers | - -> 2609.03811" in text and "2608.00001" not in text, text      # old section skipped
-        assert "row 2 | tried_rejected | - -> paper verdict: they're playing the easy game" in text, text
-        assert "row ? | tried_rejected | - -> Can labels beat the selector? → No: 0.569 against 0.695 (`fit.py`)" in text, text
+        assert "row 2 | tried_rejected | - -> paper verdict: they only beat an easy baseline" in text, text
+        assert "row ? | tried_rejected | - -> Can labels beat the selector? → No: 0.61 against 0.70 (`fit.py`)" in text, text
         assert "| a | b | c |" not in text and counts["attempts_rows"] == 1, counts        # only the refused table is read
         assert counts["commits_read"] == 1 and counts["sections_parsed"] == 1, counts
         # a decided proposal is not made again
@@ -250,7 +250,9 @@ def selftest() -> None:
         text2 = out2.read_text(encoding="utf-8")
         assert "2609.03811" not in text2 and "already decided, skipped 1" in text2, text2
         # a same-day re-run keeps the decisions the human already wrote into today's file
-        decided_line = "[y] row 1 | baseline_ref | date:2026-08-21 -> STALE (1 commits on watched paths, newest adc973e 2026-09-17 scoring: pose-independent alignment) | source: team main"
+        # the line is taken from the output, not typed: the commit sha depends on git and the machine (a typed sha
+        # passed on the laptop and failed on a CI runner, 2026-10-01)
+        decided_line = "[y]" + next(ln for ln in text2.splitlines() if ln.startswith("[ ] row 1 | baseline_ref"))[3:]
         out2.write_text(out2.read_text(encoding="utf-8").replace("[ ] row 1 | baseline_ref", "[y] row 1 | baseline_ref"), encoding="utf-8")
         out3, _ = run(ws, today=date(2026, 9, 21), since=date(2026, 9, 1), do_fetch=False)
         text3 = out3.read_text(encoding="utf-8")
