@@ -6,6 +6,9 @@ A team writes its open problems in one markdown table (`demo/ledger.md`): at mos
 the command that measured it, the commit it was measured on, what was already tried and rejected, and seed papers.
 A scheduled GitHub Actions job collects papers per row (citations of the seed papers from Semantic Scholar, then the
 best keyword matches in the week's arXiv categories) and proposes ledger updates from the repository's own history.
+A new seed brings every paper that ever cited it, so per seed and run only the newest `citers_per_seed` (default 10)
+unseen citers are listed and the rest are recorded as seen with one count line: a first run on 2026-10-01 listed 13
+papers for a row instead of about a thousand.
 No model runs in the weekly job. The only text that leaves the repository is each row's `public_query`, checked
 against a forbidden-terms list on every run.
 

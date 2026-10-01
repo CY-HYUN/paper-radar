@@ -327,6 +327,12 @@ def run(ws: Path, today: date | None = None, since: date | None = None, recommen
         slot = found[row_id].setdefault(paper["id"], {"paper": paper, "via": []})
         slot["via"].append(via)
 
+    # A seed the radar has not watched before brings every paper that ever cited it: 1,002 for one demo row on the
+    # first run (2026-10-01), a digest instead of news. Per seed and run, the newest citers_per_seed unseen citers are
+    # listed; the rest are recorded as seen and counted in the file, so no later week lists them and none vanish
+    # silently. The cap acts only when more unseen citers than that arrive for one seed in one run.
+    per_seed = s2cfg.get("citers_per_seed", 10)
+    held: dict[str, dict[str, tuple[dict, str]]] = defaultdict(dict)   # row id -> paper id -> (paper, via), not listed
     for r in active if not offline else []:             # channel 1: the seed graph
         for seed in r.seed_papers:
             try:
@@ -336,8 +342,12 @@ def run(ws: Path, today: date | None = None, since: date | None = None, recommen
                 print(f"[fail] citations of {seed}: {e}", file=sys.stderr)
                 continue
             counts["citers"] += len(citers)
+            citers = sorted((p for p in citers if p["id"] != seed), key=lambda p: p["published"], reverse=True)
+            over = {p["id"] for p in [p for p in citers if p["id"] not in seen["papers"]][per_seed:]}
             for p in citers:
-                if p["id"] != seed:
+                if p["id"] in over:
+                    held[r.id].setdefault(p["id"], (p, f"cites {seed}"))
+                else:
                     add(r.id, p, f"cites {seed}")
 
     if offline:                                          # channel 2 from the cache: query tuning without network
@@ -413,6 +423,15 @@ def run(ws: Path, today: date | None = None, since: date | None = None, recommen
             lines.append(f"- {pid} · {p['published'] or '?'} · {p['title'][:120]} · via {'; '.join(slot['via'])}")
             seen["papers"][pid] = {"first_seen": str(today), "row": rid, "via": slot["via"][0], "title": p["title"][:120]}
             new_total += 1
+        rest = {pid: v for pid, v in held.get(rid, {}).items() if pid not in items}
+        if rest:
+            counts["held_back"] += len(rest)
+            seeds = sorted({via.removeprefix("cites ") for _, via in rest.values()})
+            lines.append(f"- +{len(rest)} older papers citing {', '.join(seeds)} not listed (newest {per_seed} per seed "
+                         f"kept); recorded in seen.json with their titles, so no later week lists them")
+            for pid, (p, via) in rest.items():
+                seen["papers"][pid] = {"first_seen": str(today), "row": rid, "via": f"{via} (held back over the per-seed cap)",
+                                       "title": p["title"][:120]}
         lines.append("")
     out = ws / "candidates" / f"{week}.md"
     if not dry and not offline:                          # a dry run only shows what would go out; offline only prints
@@ -544,9 +563,37 @@ def selftest() -> None:
         for url in ["http://example.test/api/query?id_list=2510.21862%2C2602.18296&max_results=2",
                     "https://api.semanticscholar.org/graph/v1/paper/DOI:10.1038/s41586-026-11044-y/citations?fields=title%2Cyear%2CexternalIds%2CpublicationDate&limit=1000"]:
             check_outbound(url, None)                       # the shapes the radar does send still pass
+        # the per-seed cap, run at two values on the same five citers: it must change what is listed
+        five = json.dumps({"data": [{"citingPaper": {"paperId": f"p{i}", "externalIds": {"ArXiv": f"2609.0010{i}"},
+                                                     "title": f"Citer {i}", "publicationDate": f"2026-09-0{i}"}}
+                                    for i in range(1, 6)]}).encode()
+
+        def citers_only(req, timeout):
+            return io.BytesIO(five if "semanticscholar" in req.full_url else _atom([]))
+
+        def capped(cap: int, w: Path, today: date) -> tuple[Counter, str, dict]:
+            if not w.exists():
+                w.mkdir()
+                (w / "forbidden_terms.txt").write_text("ACME\n", encoding="utf-8")
+                (w / "ledger.md").write_text(header + row, encoding="utf-8")
+                (w / "radar.toml").write_text(toml + f"citers_per_seed = {cap}\n", encoding="utf-8")
+            c = run(w, today=today, since=today - timedelta(days=7), opener=citers_only, sleep=slept.append, clock=lambda: 0.0)
+            week = f"{today.isocalendar()[0]}-W{today.isocalendar()[1]:02d}"
+            return c, (w / "candidates" / f"{week}.md").read_text(encoding="utf-8"), read_json(w / "seen.json", None)["papers"]
+
+        c, text, seen = capped(2, ws / "cap2", date(2026, 9, 21))
+        assert c["new"] == 2 and c["held_back"] == 3, c
+        assert "ARXIV:2609.00105" in text and "ARXIV:2609.00104" in text and "ARXIV:2609.00103" not in text, text
+        assert "+3 older papers citing ARXIV:2510.21862" in text, text
+        assert len(seen) == 5 and sum("held back" in v["via"] for v in seen.values()) == 3, seen
+        c, text, _ = capped(2, ws / "cap2", date(2026, 9, 28))            # next week: none of the five comes back
+        assert c["new"] == 0 and c["held_back"] == 0 and c["already_seen"] == 5, c
+        c, text, seen = capped(10, ws / "cap10", date(2026, 9, 21))
+        assert c["new"] == 5 and c["held_back"] == 0 and "older papers citing" not in text, (c, text)
     print("selftest ok: window matched 1 of 3, seen id skipped, S2 citers (arXiv and DOI-only) kept, one 429 backoff, "
           "negatives parsed, key absent from the log, offline re-score sent and wrote nothing, "
-          "forbidden-term gate fired on a planted term, shape gate refused 4 free-text requests")
+          "forbidden-term gate fired on a planted term, shape gate refused 4 free-text requests, "
+          "per-seed cap 2 listed the newest 2 of 5 and recorded 3 (none back next week), cap 10 listed all 5")
 
 
 if __name__ == "__main__":
