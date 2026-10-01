@@ -1,0 +1,4 @@
+__pycache__/
+*.pyc
+# regenerated on every fetch; large and uninteresting in history
+demo/state/

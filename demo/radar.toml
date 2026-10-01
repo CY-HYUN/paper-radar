@@ -1,0 +1,32 @@
+# paper-radar settings for the demo workspace. Paths are relative to this folder (demo/).
+
+[arxiv]
+# arXiv's edge answered HTTP 406 to Python 3.12.6 with OpenSSL 3.0.15 on 2026-09-21; the workflow runs uv's Python 3.11.
+endpoint = "https://export.arxiv.org/api/query"
+categories = ["cs.CL", "cs.AI", "cs.LG", "cs.CV"]
+courtesy_seconds = 3                                 # arXiv terms of use: one request every three seconds
+page_size = 200
+
+[match]
+min_fraction = 0.3                                   # floor on the idf-weighted share of a clause's words present
+top_k = 3                                            # keyword candidates kept per row per week
+anchors = []                                         # optional domain words; a paper must contain one to be ranked
+
+[semantic_scholar]
+graph = "https://api.semanticscholar.org/graph/v1"
+recommendations = "https://api.semanticscholar.org/recommendations/v1/papers"
+key_env = "SEMANTIC_SCHOLAR_API_KEY"                 # optional; the anonymous pool answers 429 now and then
+backoff_seconds = [6, 12, 24, 48]
+recommend_limit = 10
+
+[state_diff]
+dead_after_weeks = 8
+git_fetch = true
+
+# This repository itself: a change to the matcher after a row's baseline_ref proposes STALE.
+[[state_diff.repos]]
+name = "paper-radar"
+path = ".."
+branch = "origin/main"
+watch_paths = ["fetch.py"]
+affects_rows = "judge|agent|CAD"

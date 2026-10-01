@@ -1,0 +1,4 @@
+# Terms that must never appear in a public_query (checked case-insensitively as substrings on every ledger load).
+# In a team: the company, customers, internal repositories, part ids, internal numbers. The gate refuses an empty
+# list, so this demo keeps a placeholder.
+EXAMPLE-INTERNAL-NAME

@@ -1,0 +1,44 @@
+# Weekly paper radar over demo/ledger.md. In a team repository, point WORKSPACE at the team's ledger folder.
+name: paper-radar
+
+on:
+  schedule:
+    - cron: "0 6 * * 1"          # Mondays 06:00 UTC
+  workflow_dispatch: {}
+
+permissions:
+  contents: write                # commits this week's candidates and proposals back to the branch
+
+concurrency:
+  group: paper-radar
+  cancel-in-progress: false
+
+jobs:
+  weekly:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          fetch-depth: 0         # the ledger proposals read this repository's history
+      - uses: astral-sh/setup-uv@v10
+        with:
+          python-version: "3.11" # arXiv answered HTTP 406 to Python 3.12.6 with OpenSSL 3.0.15 on 2026-09-21
+      - name: Self-tests
+        run: |
+          uv run --no-project python ledger.py --selftest
+          uv run --no-project python fetch.py --selftest
+          uv run --no-project python state_diff.py --selftest
+          uv run mcp_server.py --selftest
+      - name: Collect papers and propose ledger updates
+        env:
+          SEMANTIC_SCHOLAR_API_KEY: ${{ secrets.SEMANTIC_SCHOLAR_API_KEY }}   # optional; empty means the anonymous pool
+        run: uv run --no-project python radar.py weekly demo
+      - name: Commit this week's files
+        if: always()             # a failed call still leaves its line in runs.txt
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A -- demo
+          git diff --cached --quiet || git commit -m "demo: week $(date -u +%G-W%V)"
+          git push
