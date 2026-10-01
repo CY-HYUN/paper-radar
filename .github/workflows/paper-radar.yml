@@ -36,7 +36,7 @@ jobs:
           SEMANTIC_SCHOLAR_API_KEY: ${{ secrets.SEMANTIC_SCHOLAR_API_KEY }}   # optional; empty means the anonymous pool
         run: uv run --no-project python radar.py weekly demo
       - name: Commit this week's files
-        if: always()             # a failed call still leaves its line in runs.txt
+        if: ${{ !cancelled() }}  # a failed call still leaves its line in runs.txt; a cancelled run writes nothing
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
