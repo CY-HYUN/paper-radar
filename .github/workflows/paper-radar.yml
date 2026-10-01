@@ -30,6 +30,7 @@ jobs:
           uv run --no-project python fetch.py --selftest
           uv run --no-project python state_diff.py --selftest
           uv run mcp_server.py --selftest
+          uv run mcp_server.py --smoke demo   # every tool over a real MCP connection, on a copy
       - name: Collect papers and propose ledger updates
         env:
           SEMANTIC_SCHOLAR_API_KEY: ${{ secrets.SEMANTIC_SCHOLAR_API_KEY }}   # optional; empty means the anonymous pool
