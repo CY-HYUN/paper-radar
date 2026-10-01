@@ -16,8 +16,11 @@ against a forbidden-terms list on every run.
 under the same gates, from Claude or any MCP client:
 
 ```bash
-claude mcp add paper-radar -- uv run mcp_server.py demo
+claude mcp add -s user paper-radar -- uv run /path/to/paper-radar/mcp_server.py demo
 ```
+
+Give the script's full path so the server starts wherever Claude is opened; a relative workspace name (`demo`) is
+read from the script's folder. `claude mcp list` should then show it as connected.
 
 ## Run
 
