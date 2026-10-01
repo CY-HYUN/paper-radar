@@ -49,3 +49,10 @@
 2026-10-01T12:53:22 arxiv GET https://export.arxiv.org/api/query?search_query=cat%3Acs.LG+AND+submittedDate%3A%5B202610010000+TO+202610012359%5D&start=0&max_results=200&sortBy=submittedDate&sortOrder=descending
 2026-10-01T12:53:25 arxiv GET https://export.arxiv.org/api/query?search_query=cat%3Acs.CV+AND+submittedDate%3A%5B202610010000+TO+202610012359%5D&start=0&max_results=200&sortBy=submittedDate&sortOrder=descending
 2026-10-01T12:53:29 s2 POST https://api.semanticscholar.org/recommendations/v1/papers?fields=title%2Cyear%2CexternalIds%2CpublicationDate&limit=10 body={"positivePaperIds": ["ArXiv:2306.05685", "ArXiv:2510.21862"], "negativePaperIds": []}
+2026-10-01T12:55:10 s2 GET https://api.semanticscholar.org/graph/v1/paper/ARXIV:2306.05685/citations?fields=title%2Cyear%2CexternalIds%2CpublicationDate&limit=1000
+2026-10-01T12:55:11 s2 GET https://api.semanticscholar.org/graph/v1/paper/ARXIV:2510.21862/citations?fields=title%2Cyear%2CexternalIds%2CpublicationDate&limit=1000
+2026-10-01T12:55:11 arxiv GET https://export.arxiv.org/api/query?search_query=cat%3Acs.CL+AND+submittedDate%3A%5B202610010000+TO+202610012359%5D&start=0&max_results=200&sortBy=submittedDate&sortOrder=descending
+2026-10-01T12:55:11 arxiv GET https://export.arxiv.org/api/query?search_query=cat%3Acs.AI+AND+submittedDate%3A%5B202610010000+TO+202610012359%5D&start=0&max_results=200&sortBy=submittedDate&sortOrder=descending
+2026-10-01T12:55:14 arxiv GET https://export.arxiv.org/api/query?search_query=cat%3Acs.LG+AND+submittedDate%3A%5B202610010000+TO+202610012359%5D&start=0&max_results=200&sortBy=submittedDate&sortOrder=descending
+2026-10-01T12:55:17 arxiv GET https://export.arxiv.org/api/query?search_query=cat%3Acs.CV+AND+submittedDate%3A%5B202610010000+TO+202610012359%5D&start=0&max_results=200&sortBy=submittedDate&sortOrder=descending
+2026-10-01T12:55:20 s2 POST https://api.semanticscholar.org/recommendations/v1/papers?fields=title%2Cyear%2CexternalIds%2CpublicationDate&limit=10 body={"positivePaperIds": ["ArXiv:2306.05685", "ArXiv:2510.21862"], "negativePaperIds": []}
