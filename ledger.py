@@ -13,7 +13,7 @@ a ledger that is not enforced rots:
     `date:YYYY-MM-DD` when the sha was not recorded, or `-`. state_diff.py proposes STALE when the scorer
     or config changed after it; last_verified stamps the row, baseline_ref stamps the number (the 2026-09-21
     review found a row "verified" that day whose number predated four scorer commits)
-  * public_query is the only string that leaves the machine, so it is checked against the workspace's
+  * public_query never leaves the machine (fetch.py matches it locally); it is still checked against the workspace's
     forbidden_terms.txt on every load; one hit stops the run (fail loud, no partial fetch)
   * seed_papers are paper ids with their scheme: a bare arXiv id (2506.01234, 2506.01234v2) is read as
     ARXIV:2506.01234; DOI:10.xxxx/... and S2:<Semantic Scholar paperId> are accepted for papers with no arXiv
