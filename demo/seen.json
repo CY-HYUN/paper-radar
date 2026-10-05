@@ -1,8 +1,8 @@
 {
  "meta": {
-  "last_run": "2026-10-01",
-  "runs": 5,
-  "arxiv_last_ok": "2026-10-01"
+  "last_run": "2026-10-05",
+  "runs": 6,
+  "arxiv_last_ok": "2026-10-05"
  },
  "papers": {
   "DOI:10.1016/j.array.2026.101250": {
@@ -6130,6 +6130,630 @@
    "row": "?",
    "via": "recommended near 2 seeds, away from 0 rejected",
    "title": "Judging Instruction Responses in a Low-Resource Language: A Case Study on Basque"
+  },
+  "DOI:10.1061/jccee5.cpeng-7915": {
+   "first_seen": "2026-10-05",
+   "row": "1",
+   "via": "cites ARXIV:2306.05685",
+   "title": "MAESTRO: Fine-Tuned Multiagent Large Action Model-Based GenAI Assistant Integrating IoT Sensing, Smart Control, and Exte"
+  },
+  "DOI:10.1016/j.techfore.2026.124894": {
+   "first_seen": "2026-10-05",
+   "row": "1",
+   "via": "cites ARXIV:2306.05685",
+   "title": "Assessing inter-rater agreement among large language model judges: Evidence from persona evaluation across varying educa"
+  },
+  "DOI:10.1145/3842436.3843811": {
+   "first_seen": "2026-10-05",
+   "row": "1",
+   "via": "cites ARXIV:2306.05685",
+   "title": "Separating Safety from Preference in Clinical LLM Evaluation"
+  },
+  "DOI:10.1145/3776591.3836647": {
+   "first_seen": "2026-10-05",
+   "row": "1",
+   "via": "cites ARXIV:2306.05685",
+   "title": "Judging Turn-Taking Through a Monocultural Lens: A Parallel-Corpus Probe of Cultural Bias in LLMs"
+  },
+  "DOI:10.1145/3776591.3832521": {
+   "first_seen": "2026-10-05",
+   "row": "1",
+   "via": "cites ARXIV:2306.05685",
+   "title": "A Reproducible Multimodal LLM-as-a-Judge Workflow for Exploring Epistemic Dissonance"
+  },
+  "ARXIV:2610.03639": {
+   "first_seen": "2026-10-05",
+   "row": "1",
+   "via": "cites ARXIV:2306.05685",
+   "title": "Do Large Language Models Know Colombian Law? A Reliability Benchmark for the Colombian Legal System"
+  },
+  "ARXIV:2610.02880": {
+   "first_seen": "2026-10-05",
+   "row": "3",
+   "via": "matched 0.48 (rank 3 of 20 above floor) on 'vision language model reading technical drawings'",
+   "title": "Found but Not Read: When Extracted Text Closes the Retrieval-Reading Gap in Document Vision-Language Models"
+  },
+  "ARXIV:2610.02885": {
+   "first_seen": "2026-10-05",
+   "row": "1",
+   "via": "cites ARXIV:2306.05685",
+   "title": "PsyEvo: A Personalized Counseling Agent That Self-Evolves at Test Time"
+  },
+  "ARXIV:2610.02897": {
+   "first_seen": "2026-10-05",
+   "row": "1",
+   "via": "cites ARXIV:2306.05685",
+   "title": "Interpreting at Write Time: A Policy Ablation for Multi-Goal Agent Memory"
+  },
+  "ARXIV:2610.02844": {
+   "first_seen": "2026-10-05",
+   "row": "1",
+   "via": "cites ARXIV:2306.05685",
+   "title": "DNAlign: Dynamic Null-Space Safe Alignment for LLMs"
+  },
+  "ARXIV:2610.02877": {
+   "first_seen": "2026-10-05",
+   "row": "1",
+   "via": "matched 1.00 (rank 1 of 73 above floor) on 'LLM-as-a-judge agreement with human raters'",
+   "title": "Evaluating LLM-as-a-Judge Beyond Score Alignment: A Psychometric Analysis of Residual Judging Difficulty"
+  },
+  "ARXIV:2610.02599": {
+   "first_seen": "2026-10-05",
+   "row": "1",
+   "via": "matched 0.69 (rank 2 of 73 above floor) on 'LLM-as-a-judge agreement with human raters'",
+   "title": "TasteBench: Multimodal Benchmark for Sensory Prediction, from Molecules to Sustainable Foods"
+  },
+  "ARXIV:2610.02022": {
+   "first_seen": "2026-10-05",
+   "row": "1",
+   "via": "matched 0.65 (rank 3 of 73 above floor) on 'LLM-as-a-judge agreement with human raters'",
+   "title": "Old Ideas, Novel Problems: The Instability of LLM-Based Novelty Evaluation"
+  },
+  "ARXIV:2610.02736": {
+   "first_seen": "2026-10-05",
+   "row": "1",
+   "via": "cites ARXIV:2306.05685 (held back over the per-seed cap)",
+   "title": "TPBench: A Turning-Point Benchmark for Dialogue Compression"
+  },
+  "ARXIV:2610.02873": {
+   "first_seen": "2026-10-05",
+   "row": "1",
+   "via": "cites ARXIV:2306.05685 (held back over the per-seed cap)",
+   "title": "ConvoDrift: A Multi-Turn Conversational Dataset for Modeling Stylistic Tone Evolution"
+  },
+  "ARXIV:2610.03421": {
+   "first_seen": "2026-10-05",
+   "row": "1",
+   "via": "cites ARXIV:2306.05685 (held back over the per-seed cap)",
+   "title": "CLIMB: Confidence-Guided Complementary Evidence for Multimodal Retrieval-Augmented Generation"
+  },
+  "ARXIV:2610.03190": {
+   "first_seen": "2026-10-05",
+   "row": "1",
+   "via": "cites ARXIV:2306.05685 (held back over the per-seed cap)",
+   "title": "Not Until the Evidence Says So: Teaching LLM Investigators When to Close a Case"
+  },
+  "ARXIV:2610.03470": {
+   "first_seen": "2026-10-05",
+   "row": "1",
+   "via": "cites ARXIV:2306.05685 (held back over the per-seed cap)",
+   "title": "CorrectGuard: Eyes-Off Correctness Estimation for Black-Box Security Guardrails"
+  },
+  "ARXIV:2610.03195": {
+   "first_seen": "2026-10-05",
+   "row": "1",
+   "via": "cites ARXIV:2306.05685 (held back over the per-seed cap)",
+   "title": "Source Preference in the Wild: How LLM Agents Favor Items by Source, and How to Reduce It"
+  },
+  "ARXIV:2610.03203": {
+   "first_seen": "2026-10-05",
+   "row": "1",
+   "via": "cites ARXIV:2306.05685 (held back over the per-seed cap)",
+   "title": "AFORE: Attention-FFN Disaggregation with Overlapped Reconfiguration of Experts"
+  },
+  "ARXIV:2610.00958": {
+   "first_seen": "2026-10-05",
+   "row": "1",
+   "via": "cites ARXIV:2306.05685 (held back over the per-seed cap)",
+   "title": "Role-aware Heuristic Episodic Attention for Conversational LLMs"
+  },
+  "ARXIV:2610.01870": {
+   "first_seen": "2026-10-05",
+   "row": "1",
+   "via": "cites ARXIV:2306.05685 (held back over the per-seed cap)",
+   "title": "From Pixels to Policy: A Multi-Agent System for Intervention and Geo-Spatial Decision Support"
+  },
+  "ARXIV:2610.00888": {
+   "first_seen": "2026-10-05",
+   "row": "1",
+   "via": "cites ARXIV:2306.05685 (held back over the per-seed cap)",
+   "title": "Match the Distribution, Not the Compute: Post-Training Multi-Token Prediction Heads"
+  },
+  "ARXIV:2610.00891": {
+   "first_seen": "2026-10-05",
+   "row": "1",
+   "via": "cites ARXIV:2306.05685 (held back over the per-seed cap)",
+   "title": "Towards Retrieval Augmented Generation in High-Energy and Astroparticle Physics"
+  },
+  "ARXIV:2610.00972": {
+   "first_seen": "2026-10-05",
+   "row": "1",
+   "via": "cites ARXIV:2306.05685 (held back over the per-seed cap)",
+   "title": "VeriHarness: Scaling Agentic Verification for Long-Horizon Tasks"
+  },
+  "ARXIV:2610.01097": {
+   "first_seen": "2026-10-05",
+   "row": "1",
+   "via": "cites ARXIV:2306.05685 (held back over the per-seed cap)",
+   "title": "YouRA: A Persistent-State Architecture for Evidence-Traceable Autonomous Research Agents"
+  },
+  "ARXIV:2610.01023": {
+   "first_seen": "2026-10-05",
+   "row": "1",
+   "via": "cites ARXIV:2306.05685 (held back over the per-seed cap)",
+   "title": "Groundability, Not Scale Alone: When Weak Reviewers Can Audit Strong Coding Agents"
+  },
+  "DOI:10.1145/3832101": {
+   "first_seen": "2026-10-05",
+   "row": "1",
+   "via": "cites ARXIV:2306.05685 (held back over the per-seed cap)",
+   "title": "Datura: Progressive Red Teaming Testing for Tool Invocation Chain in LLM Agents"
+  },
+  "DOI:10.1145/3832096": {
+   "first_seen": "2026-10-05",
+   "row": "1",
+   "via": "cites ARXIV:2306.05685 (held back over the per-seed cap)",
+   "title": "E4R-Reviewer: Effective and Explainable Automated Code Review via End-to-End Reasoning-Guided Alignment"
+  },
+  "DOI:10.1145/3832292": {
+   "first_seen": "2026-10-05",
+   "row": "1",
+   "via": "cites ARXIV:2306.05685 (held back over the per-seed cap)",
+   "title": "TracePilot: Self-Verifiable Framework for Decentralized Applications Fault Localization across Transactions"
+  },
+  "DOI:10.1145/3832117": {
+   "first_seen": "2026-10-05",
+   "row": "1",
+   "via": "cites ARXIV:2306.05685 (held back over the per-seed cap)",
+   "title": "SWE-PDB: Teaching LLMs to Leverage Debugging Tools via Agentic Training"
+  },
+  "ARXIV:2610.01345": {
+   "first_seen": "2026-10-05",
+   "row": "1",
+   "via": "cites ARXIV:2306.05685 (held back over the per-seed cap)",
+   "title": "ARCCS: An Automated Regulatory Compliance Checking System"
+  },
+  "ARXIV:2610.01256": {
+   "first_seen": "2026-10-05",
+   "row": "1",
+   "via": "cites ARXIV:2306.05685 (held back over the per-seed cap)",
+   "title": "DeFA: Dependency-Guided Failure Attribution for LLM Agents"
+  },
+  "DOI:10.1145/3832209": {
+   "first_seen": "2026-10-05",
+   "row": "1",
+   "via": "cites ARXIV:2306.05685 (held back over the per-seed cap)",
+   "title": "Function Calling as a Flexible LLM Defense Add-On: Capability and Application Exploration"
+  },
+  "ARXIV:2610.01674": {
+   "first_seen": "2026-10-05",
+   "row": "1",
+   "via": "cites ARXIV:2306.05685 (held back over the per-seed cap)",
+   "title": "Invent a Dataset: Measuring dataset generation abilities with zero seed"
+  },
+  "ARXIV:2610.01243": {
+   "first_seen": "2026-10-05",
+   "row": "1",
+   "via": "cites ARXIV:2306.05685 (held back over the per-seed cap)",
+   "title": "When the Judge Acts: Auditing VLM-Guided Image Selection on Culturally Situated Prompts"
+  },
+  "ARXIV:2610.01306": {
+   "first_seen": "2026-10-05",
+   "row": "1",
+   "via": "cites ARXIV:2306.05685 (held back over the per-seed cap)",
+   "title": "DAYJOB: A Benchmark for Long-Horizon Professional Work"
+  },
+  "ARXIV:2610.01471": {
+   "first_seen": "2026-10-05",
+   "row": "1",
+   "via": "cites ARXIV:2306.05685 (held back over the per-seed cap)",
+   "title": "When Does a Second Model Help? Cross-Model Review in LLM Verification"
+  },
+  "ARXIV:2610.01548": {
+   "first_seen": "2026-10-05",
+   "row": "1",
+   "via": "cites ARXIV:2306.05685 (held back over the per-seed cap)",
+   "title": "Range-GRPO: Policy Optimization via Pairwise Relations among Reward Intervals"
+  },
+  "ARXIV:2610.01428": {
+   "first_seen": "2026-10-05",
+   "row": "1",
+   "via": "cites ARXIV:2306.05685 (held back over the per-seed cap)",
+   "title": "Generalization Is Stability, Not Accuracy: Multi-Axis Evaluation of LLMs"
+  },
+  "ARXIV:2610.02122": {
+   "first_seen": "2026-10-05",
+   "row": "1",
+   "via": "cites ARXIV:2306.05685 (held back over the per-seed cap)",
+   "title": "Argo-Bench: Evaluating Data Agents on Enterprise-Scale Workflows"
+  },
+  "ARXIV:2610.01670": {
+   "first_seen": "2026-10-05",
+   "row": "1",
+   "via": "cites ARXIV:2306.05685 (held back over the per-seed cap)",
+   "title": "Do MLLM Judges Judge the Edit? Auditing Bias in Image Editing Evaluation with Verified Quality Preservation"
+  },
+  "ARXIV:2610.01491": {
+   "first_seen": "2026-10-05",
+   "row": "2",
+   "via": "matched 1.00 (rank 1 of 225 above floor) on 'error analysis of agent trajectories'",
+   "title": "Auditing Web Agent Evaluation on WebArena-Lite: Human Review of Outcomes and Trajectories"
+  },
+  "ARXIV:2610.01316": {
+   "first_seen": "2026-10-05",
+   "row": "1",
+   "via": "cites ARXIV:2306.05685 (held back over the per-seed cap)",
+   "title": "What Wins a Vote? Formatting, Length, and Lexical Diversity in the French Compar:IA LLM Arena"
+  },
+  "ARXIV:2610.02076": {
+   "first_seen": "2026-10-05",
+   "row": "1",
+   "via": "cites ARXIV:2306.05685 (held back over the per-seed cap)",
+   "title": "LLM2Jev: LLMs Are Already Jev-Style Decision Models -- When and How to Fine-Tune Them"
+  },
+  "ARXIV:2610.01195": {
+   "first_seen": "2026-10-05",
+   "row": "1",
+   "via": "cites ARXIV:2306.05685 (held back over the per-seed cap)",
+   "title": "Federated Agent Optimization"
+  },
+  "ARXIV:2610.01833": {
+   "first_seen": "2026-10-05",
+   "row": "1",
+   "via": "cites ARXIV:2306.05685 (held back over the per-seed cap)",
+   "title": "Continuous Process-Level Evaluation for Evolving Enterprise AI Agent Skills"
+  },
+  "ARXIV:2610.01207": {
+   "first_seen": "2026-10-05",
+   "row": "1",
+   "via": "cites ARXIV:2306.05685 (held back over the per-seed cap)",
+   "title": "Dependency-Aware Reward Shaping for Agentic Reinforcement Learning"
+  },
+  "ARXIV:2610.01439": {
+   "first_seen": "2026-10-05",
+   "row": "1",
+   "via": "cites ARXIV:2306.05685 (held back over the per-seed cap)",
+   "title": "DRelay: Global Draft Context for Prefix-Aware Parallel Speculative Decoding Repair"
+  },
+  "ARXIV:2610.01938": {
+   "first_seen": "2026-10-05",
+   "row": "1",
+   "via": "cites ARXIV:2306.05685 (held back over the per-seed cap)",
+   "title": "A rubric landscape for evaluating clinical reasoning in large language models: what exists, what is missing, and what ne"
+  },
+  "ARXIV:2610.01218": {
+   "first_seen": "2026-10-05",
+   "row": "1",
+   "via": "cites ARXIV:2306.05685 (held back over the per-seed cap)",
+   "title": "AGO AI Quality Gate: Evidence-First Release Decisions for Retrieval-Augmented Generation"
+  },
+  "DOI:10.1007/s00521-026-12328-0": {
+   "first_seen": "2026-10-05",
+   "row": "1",
+   "via": "cites ARXIV:2306.05685 (held back over the per-seed cap)",
+   "title": "Performance within the foundation paradox: the case for small qualitative evaluations"
+  },
+  "ARXIV:2610.02588": {
+   "first_seen": "2026-10-05",
+   "row": "1",
+   "via": "cites ARXIV:2306.05685 (held back over the per-seed cap)",
+   "title": "Open-Endedness Bench: Measuring Epistemic Process from Agent Records"
+  },
+  "ARXIV:2610.02267": {
+   "first_seen": "2026-10-05",
+   "row": "1",
+   "via": "cites ARXIV:2306.05685 (held back over the per-seed cap)",
+   "title": "Fast Models, Slow Evidence: A Paired and Self-Audited Evaluation of System-1 Decision Models for LLM Agent Harnesses"
+  },
+  "ARXIV:2610.02451": {
+   "first_seen": "2026-10-05",
+   "row": "1",
+   "via": "cites ARXIV:2306.05685 (held back over the per-seed cap)",
+   "title": "A Simulation-Grounded Agentic VLM Framework for Wildfire Monitoring and Reporting"
+  },
+  "ARXIV:2610.02492": {
+   "first_seen": "2026-10-05",
+   "row": "1",
+   "via": "cites ARXIV:2306.05685 (held back over the per-seed cap)",
+   "title": "Right Order, Wrong Scale: Auditing LLM Judges for Occupational AI Measurement"
+  },
+  "ARXIV:2610.02574": {
+   "first_seen": "2026-10-05",
+   "row": "1",
+   "via": "cites ARXIV:2306.05685 (held back over the per-seed cap)",
+   "title": "DISSOLVR: An Interpretable and Fast Framework for Aqueous and Organic Solubility Prediction"
+  },
+  "ARXIV:2609.39050": {
+   "first_seen": "2026-10-05",
+   "row": "1",
+   "via": "cites ARXIV:2306.05685 (held back over the per-seed cap)",
+   "title": "Covert Assistance: Helpful LLM Agents Evade Oversight in Multi-Agent Systems"
+  },
+  "ARXIV:2609.40069": {
+   "first_seen": "2026-10-05",
+   "row": "1",
+   "via": "cites ARXIV:2306.05685 (held back over the per-seed cap)",
+   "title": "Conversational Capture: A Trajectory-Level Framework for Evaluating Generative Engine Optimization in Multi-turn Human-A"
+  },
+  "ARXIV:2609.39027": {
+   "first_seen": "2026-10-05",
+   "row": "1",
+   "via": "cites ARXIV:2306.05685 (held back over the per-seed cap)",
+   "title": "A Missing Piece for Trustworthy AI Reviewers: From Benchmarking Rhetorical Robustness to SciCore Review"
+  },
+  "ARXIV:2609.39102": {
+   "first_seen": "2026-10-05",
+   "row": "1",
+   "via": "cites ARXIV:2306.05685 (held back over the per-seed cap)",
+   "title": "False Frontiers: Diagnosing and Mitigating Co-Cheating in Self-Evolving Search Agents"
+  },
+  "ARXIV:2609.39143": {
+   "first_seen": "2026-10-05",
+   "row": "1",
+   "via": "cites ARXIV:2306.05685 (held back over the per-seed cap)",
+   "title": "RefCon: Iterative Refinement and Contrastive Memory Extraction for Context-Evolving Agent"
+  },
+  "ARXIV:2609.39066": {
+   "first_seen": "2026-10-05",
+   "row": "1",
+   "via": "cites ARXIV:2306.05685 (held back over the per-seed cap)",
+   "title": "Agentic Tool-Augmented Reasoning for Explainable Image Forgery Detection"
+  },
+  "ARXIV:2609.39972": {
+   "first_seen": "2026-10-05",
+   "row": "1",
+   "via": "cites ARXIV:2306.05685 (held back over the per-seed cap)",
+   "title": "UBTree: Parallel Tree Drafting via Unigram and Bigram Models for Speculative Decoding"
+  },
+  "ARXIV:2609.39154": {
+   "first_seen": "2026-10-05",
+   "row": "1",
+   "via": "cites ARXIV:2306.05685 (held back over the per-seed cap)",
+   "title": "DAGent: Evaluate-then-Grow Planning for Deep Research Agents"
+  },
+  "ARXIV:2609.39075": {
+   "first_seen": "2026-10-05",
+   "row": "1",
+   "via": "cites ARXIV:2306.05685 (held back over the per-seed cap)",
+   "title": "RAGScope: A Leakage-Controlled, Cost-Aware Evidence-Gating Protocol for RAG Hallucination Triage"
+  },
+  "ARXIV:2609.39229": {
+   "first_seen": "2026-10-05",
+   "row": "1",
+   "via": "cites ARXIV:2306.05685 (held back over the per-seed cap)",
+   "title": "RAIM: Robust Aggregation of Inexpensive Models for Hallucination Detection"
+  },
+  "ARXIV:2609.39958": {
+   "first_seen": "2026-10-05",
+   "row": "1",
+   "via": "cites ARXIV:2306.05685 (held back over the per-seed cap)",
+   "title": "Better Deck or Different Judge? Evaluating Agentic Harness Gains in Corporate and Investment Banking"
+  },
+  "ARXIV:2609.39045": {
+   "first_seen": "2026-10-05",
+   "row": "1",
+   "via": "cites ARXIV:2306.05685 (held back over the per-seed cap)",
+   "title": "RSIGame: Autonomous Agentic Game Development with Recursive Self-improvement"
+  },
+  "ARXIV:2609.39566": {
+   "first_seen": "2026-10-05",
+   "row": "1",
+   "via": "cites ARXIV:2306.05685 (held back over the per-seed cap)",
+   "title": "From Given to Gathered Evidence: Agentic Learning for Longitudinal Medical Reasoning"
+  },
+  "ARXIV:2609.39902": {
+   "first_seen": "2026-10-05",
+   "row": "1",
+   "via": "cites ARXIV:2306.05685 (held back over the per-seed cap)",
+   "title": "CodeMimicry: Exploiting Safety Generalization Lag in Large Language Models via Structured Code Completion"
+  },
+  "ARXIV:2609.39076": {
+   "first_seen": "2026-10-05",
+   "row": "1",
+   "via": "cites ARXIV:2306.05685 (held back over the per-seed cap)",
+   "title": "Multi-LLM Collaborative Alignment via Stackelberg Games"
+  },
+  "ARXIV:2610.00833": {
+   "first_seen": "2026-10-05",
+   "row": "1",
+   "via": "cites ARXIV:2306.05685 (held back over the per-seed cap)",
+   "title": "VERITYGATE: A Four-Gate Schema-Level Faithfulness Framework and Paired Benchmark for Grounded LLM Narrations over Struct"
+  },
+  "ARXIV:2610.00663": {
+   "first_seen": "2026-10-05",
+   "row": "1",
+   "via": "cites ARXIV:2306.05685 (held back over the per-seed cap)",
+   "title": "Backdoor Containment via Expert Quarantine and Shutdown in LLMs"
+  },
+  "ARXIV:2610.00562": {
+   "first_seen": "2026-10-05",
+   "row": "1",
+   "via": "cites ARXIV:2306.05685 (held back over the per-seed cap)",
+   "title": "Can LLMs Reason Over Long Horizons? An Empirical Evaluation of Context Strategies for Longitudinal Clinical Reasoning"
+  },
+  "ARXIV:2610.00416": {
+   "first_seen": "2026-10-05",
+   "row": "1",
+   "via": "cites ARXIV:2306.05685 (held back over the per-seed cap)",
+   "title": "Benchmarking Prompt Optimization of Large Language Models With Chess"
+  },
+  "ARXIV:2610.00664": {
+   "first_seen": "2026-10-05",
+   "row": "1",
+   "via": "cites ARXIV:2306.05685 (held back over the per-seed cap)",
+   "title": "PhysicsMate: A Curriculum-Grounded Bengali Benchmark for Secondary Physics QA with Small-Model Adaptation"
+  },
+  "ARXIV:2610.00825": {
+   "first_seen": "2026-10-05",
+   "row": "1",
+   "via": "cites ARXIV:2306.05685 (held back over the per-seed cap)",
+   "title": "Align Then Reason: A Multimodal Lip-Sync Judge for Dubbing"
+  },
+  "ARXIV:2610.00609": {
+   "first_seen": "2026-10-05",
+   "row": "1",
+   "via": "cites ARXIV:2306.05685 (held back over the per-seed cap)",
+   "title": "Legal Research Bench: Measuring End-to-End Reliability in Long-Horizon Legal Research Agents"
+  },
+  "ARXIV:2610.00666": {
+   "first_seen": "2026-10-05",
+   "row": "1",
+   "via": "cites ARXIV:2306.05685 (held back over the per-seed cap)",
+   "title": "VisionQ: VLM-as-a-Judge Taxonomy, Dataset and Benchmark for Qualitative Analysis in Computer Vision"
+  },
+  "ARXIV:2610.00685": {
+   "first_seen": "2026-10-05",
+   "row": "1",
+   "via": "cites ARXIV:2306.05685 (held back over the per-seed cap)",
+   "title": "Backdoor Purification for LoRA-Tuned LLMs via Null-Space Projection"
+  },
+  "DOI:10.1145/3831992": {
+   "first_seen": "2026-10-05",
+   "row": "1",
+   "via": "cites ARXIV:2306.05685 (held back over the per-seed cap)",
+   "title": "TSGen: A Framework for Indoor Trajectory-Semantic Data Synthesis"
+  },
+  "DOI:10.3389/fmed.2026.1895321": {
+   "first_seen": "2026-10-05",
+   "row": "1",
+   "via": "cites ARXIV:2306.05685 (held back over the per-seed cap)",
+   "title": "Development and expert evaluation of a culturally adapted large language model for Malay clinical history-taking simulat"
+  },
+  "ARXIV:2610.00321": {
+   "first_seen": "2026-10-05",
+   "row": "1",
+   "via": "cites ARXIV:2306.05685 (held back over the per-seed cap)",
+   "title": "CAST: Cost-Aware Speculative Trees from One-Pass Block Drafters"
+  },
+  "DOI:10.3390/make8100303": {
+   "first_seen": "2026-10-05",
+   "row": "1",
+   "via": "cites ARXIV:2306.05685 (held back over the per-seed cap)",
+   "title": "Do Large Language Models Prefer Their Developer’s Home Country? A US–China Audit of Scores Under National Attribution"
+  },
+  "DOI:10.3390/computers15100660": {
+   "first_seen": "2026-10-05",
+   "row": "1",
+   "via": "cites ARXIV:2306.05685 (held back over the per-seed cap)",
+   "title": "Energy-Efficient AI for Foundation Models: Algorithms, Hardware, and Data Center Infrastructure"
+  },
+  "ARXIV:2610.00332": {
+   "first_seen": "2026-10-05",
+   "row": "1",
+   "via": "cites ARXIV:2306.05685 (held back over the per-seed cap)",
+   "title": "The Weakest Link: Distilling LLM Reasoning with Worst-Case Constrained Reinforcement Learning"
+  },
+  "DOI:10.64898/2026.09.23.753678": {
+   "first_seen": "2026-10-05",
+   "row": "1",
+   "via": "cites ARXIV:2306.05685 (held back over the per-seed cap)",
+   "title": "Biologically grounded cell profiling across microscopy modalities"
+  },
+  "ARXIV:2609.33212": {
+   "first_seen": "2026-10-05",
+   "row": "1",
+   "via": "cites ARXIV:2306.05685 (held back over the per-seed cap)",
+   "title": "CoLMbo-SV: A Grounded Language Model for Explainable Speaker Verification"
+  },
+  "ARXIV:2610.00290": {
+   "first_seen": "2026-10-05",
+   "row": "1",
+   "via": "cites ARXIV:2306.05685 (held back over the per-seed cap)",
+   "title": "CALLIOPE: A Source-Grounded Oral Assessment System and Synthetic Readiness Evaluation"
+  },
+  "ARXIV:2610.00111": {
+   "first_seen": "2026-10-05",
+   "row": "1",
+   "via": "cites ARXIV:2306.05685 (held back over the per-seed cap)",
+   "title": "A Low Grounding Score Is Not an Ungrounded Judge: Identifying the Perceptibility Confound in Multimodal Oversight"
+  },
+  "ARXIV:2610.00073": {
+   "first_seen": "2026-10-05",
+   "row": "1",
+   "via": "cites ARXIV:2306.05685 (held back over the per-seed cap)",
+   "title": "A Comprehensive Evaluation Framework for Conversational Home Energy Management Systems"
+  },
+  "ARXIV:2610.00054": {
+   "first_seen": "2026-10-05",
+   "row": "1",
+   "via": "cites ARXIV:2306.05685 (held back over the per-seed cap)",
+   "title": "The First Token Is Not the Verdict: Hidden Costs of Reading LLM Judges Without Generating"
+  },
+  "ARXIV:2610.00074": {
+   "first_seen": "2026-10-05",
+   "row": "1",
+   "via": "cites ARXIV:2306.05685 (held back over the per-seed cap)",
+   "title": "K-Dense BYOK: An Open-Source AI Research Assistant That Runs Locally and Keeps a Hash-Chained Lab Notebook"
+  },
+  "DOI:10.15439/2026F5402": {
+   "first_seen": "2026-10-05",
+   "row": "1",
+   "via": "cites ARXIV:2306.05685 (held back over the per-seed cap)",
+   "title": "Towards LLM-Based Context Engineering for Model-Driven Vibe-DevOps-Engineering of Cross-Platform CI/CD Pipeline Support"
+  },
+  "DOI:10.15439/2026F7130": {
+   "first_seen": "2026-10-05",
+   "row": "1",
+   "via": "cites ARXIV:2306.05685 (held back over the per-seed cap)",
+   "title": "Generating Quality Word-Association Puzzles"
+  },
+  "DOI:10.1109/ICIET70550.2026.11712159": {
+   "first_seen": "2026-10-05",
+   "row": "1",
+   "via": "cites ARXIV:2306.05685 (held back over the per-seed cap)",
+   "title": "Hierarchical Repository-Level Code Summarization with Quantized Small Language Model and Graph-Guided Context"
+  },
+  "DOI:10.1109/ICIET70550.2026.11712652": {
+   "first_seen": "2026-10-05",
+   "row": "1",
+   "via": "cites ARXIV:2306.05685 (held back over the per-seed cap)",
+   "title": "LLMOps at Scale: Reliability, Cost Governance, and Multi-Model Orchestration for Enterprise Generative AI Platforms"
+  },
+  "ARXIV:2610.01364": {
+   "first_seen": "2026-10-05",
+   "row": "2",
+   "via": "matched 1.00 (rank 2 of 225 above floor) on 'silent tool failures in LLM agents'",
+   "title": "LLM-Driven Multi-Agent Control for Skill-Based Smart Manufacturing"
+  },
+  "ARXIV:2610.02033": {
+   "first_seen": "2026-10-05",
+   "row": "2",
+   "via": "matched 0.79 (rank 3 of 225 above floor) on 'error analysis of agent trajectories'",
+   "title": "Relative Transitions, Not Absolute Destinations: A Transfer-and-Ground Framework for Target-Trajectory-Free Human Mobili"
+  },
+  "ARXIV:2610.02926": {
+   "first_seen": "2026-10-05",
+   "row": "3",
+   "via": "matched 0.60 (rank 2 of 20 above floor) on 'vision language model reading technical drawings'",
+   "title": "Output Language Confusion under Multilingual Prompt Contamination"
+  },
+  "ARXIV:2610.00881": {
+   "first_seen": "2026-10-05",
+   "row": "3",
+   "via": "matched 0.74 (rank 1 of 20 above floor) on 'vision language model reading technical drawings'",
+   "title": "Machine Translation for Sign Languages"
+  },
+  "ARXIV:2610.02214": {
+   "first_seen": "2026-10-05",
+   "row": "3",
+   "via": "cites ARXIV:2510.21862",
+   "title": "MiDShip: Multimodal Dataset of Ship Cargo Hold Structures for Engineering Design"
+  },
+  "ARXIV:2609.13815": {
+   "first_seen": "2026-10-05",
+   "row": "?",
+   "via": "recommended near 2 seeds, away from 0 rejected",
+   "title": "Beyond OCR Accuracy: Text-Centric VQA Under Image Degradation with Modular and End-to-End"
   }
  }
 }
