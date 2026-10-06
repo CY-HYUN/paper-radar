@@ -4,3 +4,4 @@
 2026-10-01 12:55 weekly arxiv=0 citers=1006 recommended=10 new=0 failed_calls=0 proposals=0 commits=0 sections=0 attempts=0
 2026-10-01 13:39 weekly arxiv=0 citers=1006 recommended=10 new=0 failed_calls=0 proposals=0 commits=0 sections=0 attempts=0
 2026-10-05 14:10 weekly arxiv=1142 citers=1007 recommended=10 new=21 failed_calls=0 proposals=0 commits=0 sections=0 attempts=0
+2026-10-06 11:20 weekly arxiv=457 citers=1007 recommended=10 new=21 failed_calls=0 proposals=0 commits=0 sections=0 attempts=0 current=off
