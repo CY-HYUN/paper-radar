@@ -12,6 +12,19 @@ min_fraction = 0.3                                   # floor on the idf-weighted
 top_k = 3                                            # keyword candidates kept per row per week
 anchors = []                                         # optional domain words; a paper must contain one to be ranked
 
+[auto]
+# current.py: each weekly run, Claude reads the last `days` of a repository's history on every branch and names the
+# problems being worked on now; they are searched next to the ledger rows. Off here: this repository's own history is
+# about the radar. In a team repository set enabled = true, point repo at it, describe it in about, and add the
+# ANTHROPIC_API_KEY secret.
+enabled = false
+model = "claude-opus-5-5"
+repo = ".."
+days = 28                                            # a problem with no commit in this window stops being searched
+max_problems = 5
+max_history_chars = 60000                            # newest commits first; the run notes how many older ones were cut
+about = "a team building an AI system"               # how the prompt names the repository's work
+
 [semantic_scholar]
 graph = "https://api.semanticscholar.org/graph/v1"
 recommendations = "https://api.semanticscholar.org/recommendations/v1/papers"

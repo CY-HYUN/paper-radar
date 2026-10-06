@@ -1,7 +1,8 @@
 """One entry point, for the scheduler and for people.
 
-    python radar.py weekly <workspace>   fetch (with Semantic Scholar recommendations when it is the first run of the
-                                         month) then the ledger proposals. What the scheduled task runs.
+    python radar.py weekly <workspace>   this week's current problems from the team's history (current.py), fetch for
+                                         them and the ledger rows (with Semantic Scholar recommendations when it is the
+                                         first run of the month), then the ledger proposals. What the scheduled task runs.
     python radar.py tune   <workspace>   re-score the cached arXiv window against the current ledger and print every
                                          row's top_k (fetch.run offline=True; fetch.py --selftest asserts that mode
                                          opens no connection and changes no file). Edit a public_query, run again,
@@ -20,6 +21,7 @@ import sys
 from datetime import date, datetime
 from pathlib import Path
 
+import current
 import fetch
 import ledger
 import state_diff
@@ -35,7 +37,8 @@ def record(ws: Path, line: str) -> None:
 def weekly(ws: Path) -> int:
     today = date.today()
     try:
-        counts = fetch.run(ws, recommend=today.day <= 7)
+        auto_rows, auto = current.run(ws, today)        # this week's problems from the team's history; never raises on API errors
+        counts = fetch.run(ws, recommend=today.day <= 7, extra_rows=auto_rows)
         _, sd = state_diff.run(ws)
     except ledger.LedgerError as e:
         record(ws, f"weekly BLOCKED {e}")
@@ -46,8 +49,8 @@ def weekly(ws: Path) -> int:
         raise
     record(ws, f"weekly arxiv={counts['arxiv_entries']} citers={counts['citers']} recommended={counts['recommended']} "
                f"new={counts['new']} failed_calls={counts['failed_calls']} proposals={sd['proposals']} "
-               f"commits={sd['commits_read']} sections={sd['sections_parsed']} attempts={sd['attempts_rows']}")
-    return 1 if counts["failed_calls"] else 0
+               f"commits={sd['commits_read']} sections={sd['sections_parsed']} attempts={sd['attempts_rows']} current={auto}")
+    return 1 if counts["failed_calls"] or auto.startswith("FAILED") else 0
 
 
 def tune(ws: Path) -> int:
@@ -56,7 +59,7 @@ def tune(ws: Path) -> int:
 
 
 def check(ws: Path) -> int:
-    for script in ("ledger.py", "fetch.py", "state_diff.py"):
+    for script in ("ledger.py", "fetch.py", "state_diff.py", "current.py"):
         r = subprocess.run([sys.executable, str(HERE / script), "--selftest"], capture_output=True, text=True, encoding="utf-8")
         print((r.stdout.strip().splitlines() or [""])[-1] if r.returncode == 0 else r.stderr)
         if r.returncode:

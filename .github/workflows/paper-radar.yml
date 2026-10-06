@@ -29,12 +29,14 @@ jobs:
           uv run --no-project python ledger.py --selftest
           uv run --no-project python fetch.py --selftest
           uv run --no-project python state_diff.py --selftest
+          uv run --no-project python current.py --selftest
           uv run mcp_server.py --selftest
           uv run mcp_server.py --smoke demo   # every tool over a real MCP connection, on a copy
       - name: Collect papers and propose ledger updates
         env:
           SEMANTIC_SCHOLAR_API_KEY: ${{ secrets.SEMANTIC_SCHOLAR_API_KEY }}   # optional; empty means the anonymous pool
-        run: uv run --no-project python radar.py weekly demo
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}   # current problems ([auto] in radar.toml); empty = ledger only
+        run: uv run --no-project --with anthropic python radar.py weekly demo
       - name: Commit this week's files
         if: ${{ !cancelled() }}  # a failed call still leaves its line in runs.txt; a cancelled run writes nothing
         run: |

@@ -80,6 +80,7 @@ class Row:
     last_verified: date
     status: str
     stale: bool = field(default=False)
+    anchors: list[str] = field(default_factory=list)   # a row's own domain gate (current.py rows); empty = radar.toml's
 
     @property
     def active(self) -> bool:

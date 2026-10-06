@@ -302,12 +302,13 @@ def negatives_from(rows) -> list[str]:
 
 
 def run(ws: Path, today: date | None = None, since: date | None = None, recommend: bool = False, dry: bool = False,
-        offline: bool = False, opener=urllib.request.urlopen, sleep=time.sleep, clock=time.monotonic) -> Counter:
+        offline: bool = False, opener=urllib.request.urlopen, sleep=time.sleep, clock=time.monotonic,
+        extra_rows=()) -> Counter:
     import os
     today = today or date.today()
     cfg = load_config(ws)
     rows = ledger.load(ws, today)                       # the leak gate on public_query fires here
-    active = [r for r in rows if r.active]
+    active = [r for r in rows if r.active] + list(extra_rows)   # extra_rows: this run's current problems (current.py)
     seen = read_json(ws / "seen.json", {"meta": {}, "papers": {}})
     if since is None:
         # the window starts where the last SUCCESSFUL arXiv window ended, so a refused week is fetched next time
@@ -382,11 +383,15 @@ def run(ws: Path, today: date | None = None, since: date | None = None, recommen
     # paper into rows 4 and 6, because idf weights common words, not domain words. Anchors are a workspace choice
     # (radar.toml), measured every week by what the top three look like.
     anchors = anchor_pattern(cfg["match"].get("anchors", []))
-    scored_words = [(e, words(e["title"] + " " + e["summary"])) for e in entries
-                    if anchors is None or anchors.search(e["title"] + " " + e["summary"])]
+    texts = [(e, e["title"] + " " + e["summary"]) for e in entries]
+    scored_words = [(e, words(t)) for e, t in texts if anchors is None or anchors.search(t)]
     counts["passed_anchor_gate"] = len(scored_words)
     for r in active:
-        ranked = sorted(((match(r.public_query, pw, df), e) for e, pw in scored_words), key=lambda t: t[0][0], reverse=True)
+        pool = scored_words
+        if r.anchors:                                   # a current problem carries its own gate: an agent-context problem
+            own = anchor_pattern(r.anchors)             # is not about CAD, and the CAD anchors would hide its papers
+            pool = [(e, words(t)) for e, t in texts if own.search(t)]
+        ranked = sorted(((match(r.public_query, pw, df), e) for e, pw in pool), key=lambda t: t[0][0], reverse=True)
         above = [(sc, e) for sc, e in ranked if sc[0] >= floor]
         counts[f"above_floor_row_{r.id}"] = len(above)
         for (score, clause), e in above[:top_k]:
@@ -411,7 +416,8 @@ def run(ws: Path, today: date | None = None, since: date | None = None, recommen
     lines = [f"# Candidates — {week} (run {today}, window {since}..{today}{mode})", "",
              f"arXiv entries {counts['arxiv_entries']:,}{arxiv_note} in {', '.join(axcfg['categories'])}{anchor_note} · seed citers {counts['citers']} · "
              f"outbound calls {http.calls} (429 retries {http.retries}, failed {counts['failed_calls']}) · "
-             f"already seen, skipped {counts['already_seen']} · rows active {len(active)} of {len(rows)}", ""]
+             f"already seen, skipped {counts['already_seen']} · ledger rows active {len(active) - len(extra_rows)} of {len(rows)}"
+             f" · current problems {len(extra_rows)}", ""]
     new_total = 0
     for r in active + [None]:
         rid = r.id if r else "?"
