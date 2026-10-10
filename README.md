@@ -51,4 +51,4 @@ uv run mcp_server.py --smoke demo                                # every tool ca
 Standard library only; `mcp_server.py` declares its one dependency (the MCP SDK) inline, so `uv run` fetches it.
 Python 3.11 from uv is deliberate: arXiv answered HTTP 406 to Python 3.12.6 with OpenSSL 3.0.15 on 2026-09-21.
 
-Work in progress (October 2026): a demo ledger on public research questions.
+Maintained as my own weekly paper radar (GitHub Actions); the MCP server reads the demo workspace.
